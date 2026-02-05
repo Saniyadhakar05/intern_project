@@ -79,24 +79,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 ElevatedButton(
-                            onPressed: isLoading ? null : _login,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: isLoading
-                                ? CircularProgressIndicator(
-                                  )
-                                : Text(
-                                    'Log In',
-                                    style: GoogleFonts.acme(
-                                       color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
+                  onPressed: isLoading ? null : _login,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: isLoading
+                   ? CircularProgressIndicator(
+                  )
+                   : Text(
+                   'Log In',
+                    style: GoogleFonts.acme(
+                      color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                          fontSize: 20,
                           ),
+                    ),
+                 ),
                           SizedBox(height: 80,),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
