@@ -39,8 +39,6 @@ Future<User?> signInWithGoogle() async {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      print('accessToken is ,${googleAuth.accessToken}');
-      print('IdToken is ,${googleAuth.idToken}');
 
       final userCredential= await _auth.signInWithCredential(credential);
       return userCredential.user;

@@ -53,9 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: OutlineInputBorder(),
                         ),
                       ),
-                //     ],
-                //   ),
-                // ),
                 SizedBox(
                   height: 15,
                 ),
@@ -84,14 +81,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                             onPressed: isLoading ? null : _login,
                             style: ElevatedButton.styleFrom(
-                              // backgroundColor: Colors.pink[100],
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: isLoading
                                 ? CircularProgressIndicator(
-                                    // color: Colors.brown[400],
                                   )
                                 : Text(
                                     'Log In',
@@ -108,11 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                // Text('Dont have already account!!'),
+                                Text('Sign Up!!'),
                                 TextButton(
                                   onPressed: _signup,
                                   child: Text(
-                                    'Create a new account!!',
+                                    'Create a new account.',
                                     style: TextStyle(
                                       color: Colors.blue,
                                     ),
@@ -171,6 +166,7 @@ Future<void> _login() async {
         email.text.trim(),
         password.text.trim(),
       );
+      // ignore: use_build_context_synchronously
       Navigator.push(context, MaterialPageRoute(builder: (context)=>Homescreen()));
     } catch (e) {
       _showError(e.toString());
