@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intern_project/screens/addnotes.dart';
+import 'package:flutter_intern_project/screens/notesdetailed.dart';
 class Homescreen extends StatelessWidget {
    Homescreen({super.key});
    final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -32,12 +33,19 @@ class Homescreen extends StatelessWidget {
                 }
                 final notes = snapshots.data!.docs;
                 return ListView.builder(
+                  
                   itemCount: notes.length,
                   itemBuilder: (context,index){
-                    final note = notes[index].data() as Map<dynamic,String>;
+                    final note = notes[index].data();
+                     final String docId = notes[index].id;
                     return Card(
-                      child: ListTile(
-                        title: Text(note['title'] ?? ''),                        
+                      child: InkWell(
+                        onTap: () => Navigator.push(context, 
+                        MaterialPageRoute(builder: (context)=> Notesdetailed( note: note, docId: docId,))
+                        ),
+                        child: ListTile(
+                          title: Text(note['title'] ?? ''),                        
+                        ),
                       ),
                     );
                   });             

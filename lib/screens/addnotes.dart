@@ -1,9 +1,11 @@
 import 'dart:core';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 class Addnotes extends StatefulWidget {
-  const Addnotes({super.key});
+  final Map<String,dynamic>? note;
+    final String? docId; 
+  const Addnotes({super.key, this.note, this.docId});
 
   @override
   State<Addnotes> createState() => _AddnotesState();
@@ -19,13 +21,27 @@ class _AddnotesState extends State<Addnotes> {
     final content = _content.text.trim();
     if (title.isEmpty || content.isEmpty) return;
 
+    if(widget.docId == null){
     await _firebaseFirestore.collection('notes').add({
       'title': title,
       'content': content,
       'createdAt': FieldValue.serverTimestamp(),
     });
+    }
+    else{
+     await _firebaseFirestore.collection('notes')
+      .doc(widget.docId)
+      .update({
+        'title' : title,
+        'content': content,
+        'updateAt': FieldValue.serverTimestamp(),
+      });
+      
+    }
+    if(!mounted) return;
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
+    
   }
   
   @override
@@ -34,6 +50,16 @@ class _AddnotesState extends State<Addnotes> {
    _content.dispose();
     super.dispose();
   }
+
+  @override
+void initState() {
+  super.initState();
+  if (widget.note != null) {
+    _title.text = widget.note!['title'] ?? '';
+    _content.text = widget.note!['content'] ?? '';
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
